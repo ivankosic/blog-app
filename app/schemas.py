@@ -1,26 +1,28 @@
-from pydantic import BaseModel
-import datetime
+from datetime import datetime
 
-class BlogPostResponse(BaseModel):
-    id : int
-    title : str
-    content : str
-    created_at : datetime
+from pydantic import BaseModel, ConfigDict
+
 
 class BlogPostCreate(BaseModel):
-    title : str
-    content : str
+    title: str
+    content: str
 
 
+class BlogPostResponse(BlogPostCreate):
+    model_config = ConfigDict(from_attributes=True)
 
-class CommentResponse(BaseModel):
-    id : int
-    blog_id : int
-    author : str
-    content : str
-    created_at : datetime
+    id: int
+    created_at: datetime
+
 
 class CommentCreate(BaseModel):
-    blog_id : int
-    author : str
-    content : str
+    author: str
+    content: str
+
+
+class CommentResponse(CommentCreate):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    blog_id: int
+    created_at: datetime
