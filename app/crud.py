@@ -61,7 +61,7 @@ def get_comment_by_id(db: Session, id: int):
 
 
 def get_comments_by_blog_id(db: Session, blog_id: int):
-    return db.query(models.Comments).filter(models.Comments.id == blog_id).all()
+    return db.query(models.Comments).filter(models.Comments.blog_id == blog_id).all()
 
 
 def create_comment(db: Session, body: schemas.CommentCreate):
